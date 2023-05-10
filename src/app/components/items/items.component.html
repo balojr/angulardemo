@@ -1,0 +1,12 @@
+<div class="items">
+    <div class="item" *ngFor="let item of items">
+        <div class="image">
+            <img [src]="item.image" alt="{{item.description}}">
+        </div>
+        <div class="desc">
+            <span> {{item.name}}</span>
+            <span> {{item.description}}</span>
+            <span>Ksh {{item.price}}</span>
+        </div>
+    </div>
+</div>
