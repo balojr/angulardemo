@@ -1,12 +1,37 @@
 <div class="items">
-    <div class="item" *ngFor="let item of items">
-        <div class="image">
-            <img [src]="item.image" alt="{{item.description}}">
+    <div class="nav">
+        <div class="search">
+            <app-item-search></app-item-search>
         </div>
-        <div class="desc">
-            <span class="text1"> {{item.name}}</span>
-            <span class="text2"> {{item.description}}</span>
-            <span class="text3">Ksh {{item.price}}</span>
+        <div class="detail">
+            <app-item-detail [item]="selectedItem"></app-item-detail>
+        </div>
+        <div class="edit">
+            <span>Id</span><input id="item-id" #itemId/>
+            <span>Name</span><input id="new-item" #itemName/>
+            <span>Desc</span><input id="item-desc" #itemDesc>
+            <span>Price</span><input id="item-price" #itemPrice>
+
+            <!-- (click) passes input value to add() and then clears the input -->
+            <button type="button" class="add-button" (click)="add(itemId.value,itemName.value, itemDesc.value, itemPrice.value); itemName.value=''; itemDesc.value=''; itemPrice.value=''; itemId.value=''">
+              Add item
+            </button>
+        </div>
+
+    </div>
+    <div class="items1">
+        <div class="item" *ngFor="let item of items">
+            <button [class.selected]="item === selectedItem" type="button" (click)="onSelect(item)">
+                <div class="image">
+                    <img [src]="item.image" alt="{{item.description}}">
+                </div>
+                <div class="desc">
+                    <span class="text1"> {{item.name}}</span>
+                    <span class="text2"> {{item.description}}</span>
+                    <span class="text3">Ksh {{item.price}}</span>
+                </div>
+            </button>
+            <button type="button" class="delete" title="delete item" (click)="delete(item)">x</button>
         </div>
     </div>
 </div>

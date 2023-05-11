@@ -41,4 +41,11 @@ export class InMemoryDataService implements InMemoryDbService {
   genId2(cutomers: Customer[]): number {
     return cutomers.length > 0 ? Math.max(...cutomers.map(customer => customer.id)) + 1 : 11;
   }
+
+  updateItem(item: Item): void {
+  }
+  addItem(item: Item): void {
+  }
+  deleteItem(id: number): void {
+  }
 }

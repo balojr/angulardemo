@@ -10,6 +10,11 @@ import { ItemService } from '../../services/item.service';
 export class ItemsComponent implements OnInit{
   items: Item[] = [];
 
+  selectedItem?: Item;
+  onSelect(item: Item): void {
+    this.selectedItem = item;
+  }
+
   constructor(private itemService: ItemService) { }
 
 
@@ -19,5 +24,22 @@ export class ItemsComponent implements OnInit{
   getItems(): void {
     this.itemService.getItems()
       .subscribe(items => this.items = items);
+  }
+  add(id: string,name: string, description: string, price: string,): void {
+    name = name.trim();
+    description = description.trim();
+    price = price.trim();
+    parseInt(id = id.trim());
+
+    if (!name && !description && !price) { return; }
+    this.itemService.addItem({id, name, description, price, image: "./assets/images/image1.jpg"} as unknown as Item)
+      .subscribe(item => {
+        this.items.push(item);
+      });
+      console.log(this.items);
+  }
+  delete(item: Item): void {
+    this.items = this.items.filter(i => i !== item);
+    this.itemService.deleteItem(item.id).subscribe();
   }
 }
